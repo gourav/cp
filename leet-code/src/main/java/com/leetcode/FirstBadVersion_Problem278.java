@@ -27,25 +27,29 @@ public class FirstBadVersion_Problem278 {
 
   public int firstBadVersion(int n) {
 
-    int low = 1, high = n, ver = 0;
+      int left = 1;
+      int right = n;
+      int mid = left + (right - left) / 2;
 
-    /*
-     * People use this formula to avoid overflow.
-     * It probably will not land where you want.
-     * But few extra iterations are still better than overlfow.
-     */
-    int mid = low + (high - low) / 2;
+      boolean bad;
+      while (left < right) {
+        bad = isBadVersion(mid);
+        if (bad) {
+          right = mid;
+        } else {
+          left = mid + 1;
+        }
 
-    while (low <= high) {
-      if (isBadVersion(mid)) {
-        ver = mid;
-        high = mid - 1;
-      } else {
-        low = mid + 1;
+        /*
+         * People use this formula to avoid overflow.
+         * It probably will not land where you want.
+         * But few extra iterations are still better than overlfow.
+         */
+        mid = left + (right-left)/2;
+
       }
-      mid = low + (high - low) / 2;
-    }
-    return ver;
+
+      return left;
 
   }
 
