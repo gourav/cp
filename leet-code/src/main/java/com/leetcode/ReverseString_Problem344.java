@@ -47,12 +47,29 @@ public class ReverseString_Problem344 {
      * Approach 2
      * Runtime: 0 ms, faster than 100.00% of Java online submissions for Reverse String.
      * ===
-     */
-
+     *
     for (int at = 0; at < s.length / 2; at++) {
       char temp = s[at];
       s[at] = s[s.length - at - 1];
       s[s.length - at - 1] = temp;
+    }
+
+    return s;*/
+
+    /*
+     * Approach Three - Two Pointer approach
+     * ===
+     * Runtime: 1 ms, faster than 81.61% of Java online submissions for Reverse String.
+     * Memory Usage: 49 MB, less than 90.26% of Java online submissions for Reverse String.
+     */
+    int left = 0, right = s.length - 1;
+
+    while(left < right) {
+      char temp = s[left];
+      s[left] = s[right];
+      s[right] = temp;
+      left++;
+      right--;
     }
 
     return s;
